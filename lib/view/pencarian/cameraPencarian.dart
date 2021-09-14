@@ -3,13 +3,14 @@ import 'package:get/get.dart';
 import 'package:indomartel/controller/pencarian/pencarianController.dart';
 import 'package:indomartel/view/pencarian/nopol.dart';
 
-class Pencarian extends StatelessWidget {
+class CameraSearch extends StatelessWidget {
   final PencarianController pencarianController =
       Get.put(PencarianController());
-  Pencarian({Key? key}) : super(key: key);
+  CameraSearch({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -130,6 +131,17 @@ class Pencarian extends StatelessWidget {
                                 },
                               ),
                       )),
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 10, right: 10),
+                width: width,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Obx(() => Text("Scan")),
+                ),
               ),
             ],
           ),

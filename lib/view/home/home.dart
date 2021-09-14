@@ -4,6 +4,7 @@ import 'package:indomartel/controller/home/homeController.dart';
 import 'package:indomartel/view/download_data/download_data.dart';
 import 'package:indomartel/view/home/widgetMenu.dart';
 import 'package:indomartel/view/info/info.dart';
+import 'package:indomartel/view/pencarian/menuPencarian.dart';
 import 'package:indomartel/view/pencarian/pencarian.dart';
 import 'package:indomartel/view/setting/setting.dart';
 
@@ -55,7 +56,7 @@ class Home extends StatelessWidget {
                               icon: Icons.search,
                               text: "Pencarian",
                               onPressed: () {
-                                Get.to(() => Pencarian());
+                                Get.to(() => MenuPencarian());
                               },
                             ),
                             WidgetMenu(

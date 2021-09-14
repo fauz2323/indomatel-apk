@@ -9,7 +9,6 @@ import 'package:indomartel/view/download_data/download_data.dart';
 import 'package:indomartel/view/home/home.dart';
 import 'package:indomartel/view/screen_redirect/aktifasiemail.dart';
 import 'package:indomartel/view/screen_redirect/confirmpurchase.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
