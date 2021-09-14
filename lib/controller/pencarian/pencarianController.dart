@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-import 'package:headset_connection_event/headset_event.dart';
 import 'package:hive/hive.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:indomartel/model/mateldata.dart';
 import 'package:indomartel/view/download_data/download_data.dart';
-import 'package:indomartel/view/home/home.dart';
+import 'package:flutter_mobile_vision_2/flutter_mobile_vision_2.dart';
 
 class PencarianController extends GetxController {
   final storage = new FlutterSecureStorage();
   var token;
+  List<OcrText> texts = [];
   var text = ''.obs;
+  var isInitialize = false.obs;
   var status = 'Listen'.obs;
   var listen = true.obs;
   stt.SpeechToText speech = stt.SpeechToText();
@@ -21,6 +20,7 @@ class PencarianController extends GetxController {
   var isListening = false.obs;
   var load = true.obs;
   var uri = Uri.parse("uri");
+  int _cameraOcr = FlutterMobileVision.CAMERA_BACK;
   var data = <Mateldata>[].obs;
   var search = <Mateldata>[].obs;
   TextEditingController controller = new TextEditingController();
@@ -77,13 +77,25 @@ class PencarianController extends GetxController {
     }
   }
 
-  onScan() async {}
+  onScan() async {
+    try {
+      texts = await FlutterMobileVision.read(
+        autoFocus: true,
+        multiple: true,
+        fps: 2.0,
+        waitTap: true,
+      );
+    } on Exception {
+      texts.add(new OcrText('Failed to recognize text.'));
+    }
+  }
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
     initital();
+    FlutterMobileVision.start();
   }
 
   @override

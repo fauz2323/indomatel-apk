@@ -139,8 +139,10 @@ class CameraSearch extends StatelessWidget {
                   color: Colors.white,
                 ),
                 child: ElevatedButton(
-                  onPressed: () {},
-                  child: Obx(() => Text("Scan")),
+                  onPressed: () {
+                    pencarianController.onScan();
+                  },
+                  child: Text("SCANs"),
                 ),
               ),
             ],
