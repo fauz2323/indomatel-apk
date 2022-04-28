@@ -34,7 +34,7 @@ class DaftarController extends GetxController {
       } else if (res['message'] == 201) {
         Get.snackbar("Error", "${res['status']}");
       } else {
-        Get.off(Aktifasi());
+        Get.off(() => Aktifasi());
       }
     } else {
       Get.snackbar("Message", "Error COnnection");

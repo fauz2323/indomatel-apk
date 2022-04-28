@@ -51,7 +51,7 @@ class LoginController extends GetxController {
 
       print('test');
       load.value = false;
-      Get.off(Home());
+      Get.off(() => Home());
     } else if (response.statusCode == 301) {
       await storage.write(key: 'token', value: dataresponse['token']);
 
@@ -66,7 +66,7 @@ class LoginController extends GetxController {
       await storage.write(key: 'token', value: dataresponse['token']);
 
       load.value = false;
-      Get.off(ConfirmPurchase());
+      Get.off(() => ConfirmPurchase());
     }
     load.value = false;
   }

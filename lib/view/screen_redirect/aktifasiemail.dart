@@ -6,7 +6,7 @@ class Aktifasi extends StatelessWidget {
   const Aktifasi({Key? key}) : super(key: key);
 
   back() {
-    Get.off(Login());
+    Get.off(() => Login());
   }
 
   @override

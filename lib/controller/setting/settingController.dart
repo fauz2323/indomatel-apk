@@ -33,7 +33,7 @@ class SettingController extends GetxController {
     print(boxHive.length);
     boxHive.clear();
     await storage.deleteAll();
-    Get.offAll(Login());
+    Get.offAll(() => Login());
   }
 
   @override

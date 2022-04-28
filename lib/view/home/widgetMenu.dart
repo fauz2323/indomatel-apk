@@ -4,16 +4,22 @@ class WidgetMenu extends StatelessWidget {
   final IconData icon;
   final String text;
   final VoidCallback onPressed;
+  final double W;
+  final double H;
   WidgetMenu(
       {Key? key,
       required this.icon,
       required this.text,
-      required this.onPressed})
+      required this.onPressed,
+      required this.W,
+      required this.H})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: H,
+      width: W,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(

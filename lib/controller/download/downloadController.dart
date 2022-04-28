@@ -15,6 +15,7 @@ class DownloadController extends GetxController {
   var token;
   var load = true.obs;
   var dataTotal = 0.obs;
+  var end = false;
 
   initialize() async {
     final boxHive = await Hive.openBox('boxMatel');
@@ -27,21 +28,23 @@ class DownloadController extends GetxController {
     load.value = false;
     token = await storage.read(key: 'token');
     final boxHive = await Hive.openBox('boxMatel');
-    final response = await http.get(uri, headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $token',
-    });
-    dataTotal.value = json.decode(response.body)['totalData'];
-    var data = json.decode(response.body)['data'];
-    var dataMap = data as List;
-    dataMap.forEach((element) {
-      var datas = Mateldata.fromJson(element);
-      totalAwal.value = totalAwal.value + 1;
-      boxHive.put(datas.id, datas);
-    });
-    total.value = boxHive.length;
-    print("k8887k");
+    do {
+      final response = await http.get(uri, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+      });
+      dataTotal.value = json.decode(response.body)['totalData'];
+      var data = json.decode(response.body)['data']['data'];
+      var dataMap = data as List;
+      dataMap.forEach((element) {
+        var datas = Mateldata.fromJson(element);
+        totalAwal.value = totalAwal.value + 1;
+        boxHive.put(datas.id, datas);
+      });
+      total.value = boxHive.length;
+      print("k8887k");
+    } while (end = true);
 
     // Get.off(Home());
     load.value = true;
@@ -49,7 +52,7 @@ class DownloadController extends GetxController {
   }
 
   getTo() {
-    Get.off(Home());
+    Get.off(() => Home());
   }
 
   @override

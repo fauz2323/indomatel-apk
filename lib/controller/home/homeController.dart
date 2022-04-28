@@ -25,13 +25,13 @@ class HomeController extends GetxController {
     if (response.statusCode == 200) {
       load.value = false;
     } else if (response.statusCode == 222) {
-      Get.off(ConfirmPurchase());
+      Get.off(() => ConfirmPurchase());
     } else if (response.statusCode == 201) {
-      Get.off(Aktifasi());
+      Get.off(() => Aktifasi());
     } else {
       print("aaa");
       storage.deleteAll();
-      Get.off(Login());
+      Get.off(() => Login());
     }
   }
 

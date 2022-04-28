@@ -77,7 +77,7 @@ class ConfirmPurchase extends StatelessWidget {
                   ElevatedButton(
                       onPressed: () async {
                         storage.deleteAll();
-                        Get.off(Login());
+                        Get.off(() => Login());
                       },
                       child: Text("Logout")),
                   Text(

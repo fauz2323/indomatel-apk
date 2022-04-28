@@ -15,59 +15,65 @@ class MenuPencarian extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color.fromRGBO(0, 255, 135, 1),
-            Color.fromRGBO(96, 239, 255, 1)
-          ],
-        ),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          title: Text("Pencarian"),
-          centerTitle: true,
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-        ),
-        body: Center(
-          child: Container(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              MenuPencarianWidget(
-                fun: () {
-                  Get.to(() => Pencarian(), arguments: 'Keyboard');
-                },
-                tittle: "Keyboard",
-                icon: Icons.keyboard,
-              ),
-              MenuPencarianWidget(
-                fun: () {
-                  if (menuPencarianController.headsetState ==
-                      HeadsetState.CONNECT) {
-                    Get.to(() => VoiceSearch(), arguments: 'Voice');
-                  } else {
-                    Get.snackbar('Error', 'Pasang Headset terlebih dahulu');
-                  }
-                },
-                tittle: "Suara ( Voice )",
-                icon: Icons.mic,
-              ),
-              MenuPencarianWidget(
-                fun: () {
-                  Get.to(() => CameraSearch());
-                },
-                tittle: "Camera",
-                icon: Icons.camera,
-              ),
+    return SafeArea(
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color.fromRGBO(0, 255, 135, 1),
+              Color.fromRGBO(96, 239, 255, 1)
             ],
-          )),
+          ),
+        ),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            title: Text(
+              "Pencarian",
+              style: TextStyle(color: Colors.black),
+            ),
+            centerTitle: true,
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+          ),
+          body: Center(
+            child: Container(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                MenuPencarianWidget(
+                  fun: () {
+                    Get.to(() => Pencarian(), arguments: 'Keyboard');
+                  },
+                  tittle: "Keyboard",
+                  icon: Icons.keyboard,
+                ),
+                MenuPencarianWidget(
+                  fun: () {
+                    Get.to(() => VoiceSearch(), arguments: 'Voice');
+                    // if (menuPencarianController.headsetState ==
+                    //     HeadsetState.CONNECT) {
+                    //   Get.to(() => VoiceSearch(), arguments: 'Voice');
+                    // } else {
+                    //   Get.snackbar('Error', 'Pasang Headset terlebih dahulu');
+                    // }
+                  },
+                  tittle: "Suara ( Voice )",
+                  icon: Icons.mic,
+                ),
+                MenuPencarianWidget(
+                  fun: () {
+                    Get.to(() => CameraSearch());
+                  },
+                  tittle: "Camera",
+                  icon: Icons.camera,
+                ),
+              ],
+            )),
+          ),
         ),
       ),
     );
@@ -93,6 +99,14 @@ class MenuPencarianWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(8)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
       ),
       margin: EdgeInsets.all(10),
       child: Material(
@@ -102,7 +116,16 @@ class MenuPencarianWidget extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [Icon(icon), Text(tittle)],
+            children: [
+              Icon(
+                icon,
+                size: 50,
+              ),
+              Text(
+                tittle,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              )
+            ],
           ),
         ),
       ),

@@ -44,45 +44,87 @@ class Home extends StatelessWidget {
                   ),
                   Column(
                     children: [
-                      Container(
-                          margin: EdgeInsets.all(10),
-                          height: height * 30 / 100,
-                          child: Image.asset('asset/image/logo.png')),
-                      Expanded(
-                        child: GridView.count(
-                          crossAxisCount: 2,
-                          children: [
-                            WidgetMenu(
-                              icon: Icons.search,
-                              text: "Pencarian",
-                              onPressed: () {
-                                Get.to(() => MenuPencarian());
-                              },
-                            ),
-                            WidgetMenu(
-                              icon: Icons.download,
-                              text: "Download Data",
-                              onPressed: () {
-                                Get.off(Download());
-                              },
-                            ),
-                            WidgetMenu(
-                              icon: Icons.people,
-                              text: "Info Perpanjang Akun",
-                              onPressed: () {
-                                Get.to(() => Info());
-                              },
-                            ),
-                            WidgetMenu(
-                              icon: Icons.settings,
-                              text: "Setting",
-                              onPressed: () {
-                                Get.to(() => Setting());
-                              },
-                            ),
-                          ],
-                        ),
+                      SizedBox(
+                        height: 40,
                       ),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Container(
+                            margin: EdgeInsets.all(10),
+                            height: height * 30 / 100,
+                            child: Image.asset('asset/image/logo.png')),
+                      ),
+                      Column(
+                        children: [
+                          WidgetMenu(
+                            H: height * 20 / 100,
+                            W: width * 90 / 100,
+                            icon: Icons.search,
+                            text: "Pencarian",
+                            onPressed: () {
+                              Get.to(() => MenuPencarian());
+                            },
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              WidgetMenu(
+                                H: height * 20 / 100,
+                                W: width * 40 / 100,
+                                icon: Icons.people,
+                                text: "Perpanjang Akun",
+                                onPressed: () {
+                                  Get.to(() => Info());
+                                },
+                              ),
+                              WidgetMenu(
+                                H: height * 20 / 100,
+                                W: width * 40 / 100,
+                                icon: Icons.settings,
+                                text: "Setting",
+                                onPressed: () {
+                                  Get.to(() => Setting());
+                                },
+                              ),
+                            ],
+                          )
+                        ],
+                      )
+                      // Expanded(
+                      //   child: GridView.count(
+                      //     crossAxisCount: 2,
+                      //     children: [
+                      //       WidgetMenu(
+                      //         icon: Icons.search,
+                      //         text: "Pencarian",
+                      //         onPressed: () {
+                      //           Get.to(() => MenuPencarian());
+                      //         },
+                      //       ),
+                      //       WidgetMenu(
+                      //         icon: Icons.download,
+                      //         text: "Download Data",
+                      //         onPressed: () {
+                      //           Get.off(() => Download());
+                      //         },
+                      //       ),
+                      //       WidgetMenu(
+                      //         icon: Icons.people,
+                      //         text: "Info Perpanjang Akun",
+                      //         onPressed: () {
+                      //           Get.to(() => Info());
+                      //         },
+                      //       ),
+                      //       WidgetMenu(
+                      //         icon: Icons.settings,
+                      //         text: "Setting",
+                      //         onPressed: () {
+                      //           Get.to(() => Setting());
+                      //         },
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                     ],
                   )
                 ],

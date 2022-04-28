@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_launch/flutter_launch.dart';
 import 'package:get/get.dart';
 import 'package:indomartel/controller/redirect_screen/confirmController.dart';
 
@@ -7,6 +8,15 @@ class PopupAkun extends StatelessWidget {
   final text;
   final akun;
   PopupAkun({Key? key, this.text, this.akun}) : super(key: key);
+
+  void whatsAppOpen() async {
+    bool whatsapp = await FlutterLaunch.hasApp(name: "whatsapp");
+    if (whatsapp) {
+      await FlutterLaunch.launchWhatsapp(phone: "0888898888", message: "Hello");
+    } else {
+      Get.snackbar("Error", "WhatsApp tidak ditemukan");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +57,11 @@ class PopupAkun extends StatelessWidget {
                   ),
                   IconButton(
                       onPressed: () {}, icon: Icon(Icons.wallet_giftcard)),
-                  ElevatedButton(onPressed: () {}, child: Text("Whatsapp")),
+                  ElevatedButton(
+                      onPressed: () {
+                        whatsAppOpen();
+                      },
+                      child: Text("Whatsapp")),
                   ElevatedButton(onPressed: () {}, child: Text("Email")),
                 ],
               ),

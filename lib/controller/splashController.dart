@@ -15,9 +15,9 @@ class SplashController extends GetxController {
       PackageInfo packageInfo = await PackageInfo.fromPlatform();
       String version = packageInfo.version;
       if (value != null) {
-        Get.off(Home(), transition: Transition.zoom);
+        Get.off(() => Home(), transition: Transition.zoom);
       } else {
-        Get.off(Login(), transition: Transition.fade);
+        Get.off(() => Login(), transition: Transition.fade);
       }
     });
   }
