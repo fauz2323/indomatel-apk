@@ -161,8 +161,16 @@ class CameraSearch extends StatelessWidget {
                   (() => (pencarianController.onData.value)
                       ? (pencarianController.load.value)
                           ? CircularProgressIndicator()
-                          : PencarianWidgetCard(
-                              pencarianController: pencarianController)
+                          : Column(
+                              children:
+                                  pencarianController.newModel.data.map((e) {
+                              return PencarianWidgetCard(
+                                nama: e.tipeKendaraan,
+                                nopol: e.nopol,
+                                rangka: e.nomorRangka,
+                                mesin: e.nomorMesin,
+                              );
+                            }).toList())
                       : Text("Silahkan Cari Data")),
                 ),
               ],

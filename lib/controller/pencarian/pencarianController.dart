@@ -48,21 +48,25 @@ class PencarianController extends GetxController {
   }
 
   seacrchData() async {
-    load.value = true;
-    final response = await http.post(
-        Uri.parse('https://indomatel.com/api/nopol'),
-        body: {'nopol': controller.text.replaceAll(' ', '')});
-    final jsonData = json.decode(response.body);
-    if (response.statusCode == 200) {
-      newModel = NewModelSearch.fromJson(jsonData);
-      print(newModel.data.nomorRangka);
-    } else if (response.statusCode == 404) {
-      newModel = NewModelSearch.fromJson(jsonData);
+    if (controller.text.length > 3) {
+      load.value = true;
+      final response = await http.post(
+          Uri.parse('https://indomatel.com/api/nopol'),
+          body: {'nopol': controller.text.replaceAll(' ', '')});
+      final jsonData = json.decode(response.body);
+      if (response.statusCode == 200) {
+        newModel = NewModelSearch.fromJson(jsonData);
+        print(newModel.data);
+      } else if (response.statusCode == 404) {
+        newModel = NewModelSearch.fromJson(jsonData);
+      } else {
+        print('jsonData');
+      }
+      onData.value = true;
+      load.value = false;
     } else {
-      print('jsonData');
+      Get.snackbar("Peringatan", "Minimal 4 huruf");
     }
-    onData.value = true;
-    load.value = false;
   }
 
   onSearch(String text) async {
@@ -85,7 +89,7 @@ class PencarianController extends GetxController {
     print(response.body);
     if (response.statusCode == 200) {
       newModel = NewModelSearch.fromJson(jsonData);
-      print(newModel.data.nomorRangka);
+      print(newModel.data);
     } else if (response.statusCode == 404) {
       newModel = NewModelSearch.fromJson(jsonData);
     } else {

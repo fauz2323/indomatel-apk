@@ -50,7 +50,6 @@ class Pencarian extends StatelessWidget {
                       trailing: IconButton(
                         onPressed: () {
                           pencarianController.controller.clear();
-                          pencarianController.onSearch('');
                         },
                         icon: Icon(Icons.cancel),
                       ),
@@ -143,16 +142,27 @@ class Pencarian extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: Get.height * 10 / 100,
+                  height: Get.height * 2 / 100,
                 ),
                 Obx(
                   (() => (pencarianController.onData.value)
                       ? (pencarianController.load.value)
                           ? CircularProgressIndicator()
-                          : PencarianWidgetCard(
-                              pencarianController: pencarianController)
+                          : Column(
+                              children:
+                                  pencarianController.newModel.data.map((e) {
+                              return PencarianWidgetCard(
+                                nama: e.tipeKendaraan,
+                                nopol: e.nopol,
+                                rangka: e.nomorRangka,
+                                mesin: e.nomorMesin,
+                              );
+                            }).toList())
                       : Text("Silahkan Cari Data")),
                 ),
+                SizedBox(
+                  height: 30,
+                )
               ],
             ),
           ),
@@ -165,10 +175,16 @@ class Pencarian extends StatelessWidget {
 class PencarianWidgetCard extends StatelessWidget {
   const PencarianWidgetCard({
     Key? key,
-    required this.pencarianController,
+    required this.nopol,
+    required this.mesin,
+    required this.rangka,
+    required this.nama,
   }) : super(key: key);
 
-  final PencarianController pencarianController;
+  final String nopol;
+  final String mesin;
+  final String rangka;
+  final String nama;
 
   @override
   Widget build(BuildContext context) {
@@ -188,41 +204,46 @@ class PencarianWidgetCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: Text(
-              (pencarianController.newModel.data.nopol != "tidak ditemukan")
+              (nopol != "tidak ditemukan")
                   ? "Data Ditemukan"
                   : "Tidak Ditemukan",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Column(
             children: [
-              Text("Nomor Polisi"),
-              Text(pencarianController.newModel.data.nopol),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Nomor Polisi"),
+                  Text(nopol),
+                ],
+              ),
+              DividerCostom(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Nomor Rangka"),
+                  Text(rangka),
+                ],
+              ),
+              DividerCostom(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Nomor Mesin"),
+                  Text(mesin),
+                ],
+              ),
+              DividerCostom(),
+              Text("Tipe Kendaraan : "),
+              Text(
+                nama,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20),
+              ),
             ],
-          ),
-          DividerCostom(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Nomor Rangka"),
-              Text(pencarianController.newModel.data.nomorRangka),
-            ],
-          ),
-          DividerCostom(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Nomor Mesin"),
-              Text(pencarianController.newModel.data.nomorMesin),
-            ],
-          ),
-          DividerCostom(),
-          Text("Tipe Kendaraan : "),
-          Text(
-            pencarianController.newModel.data.tipeKendaraan,
-            style: TextStyle(fontSize: 20),
-          ),
+          )
         ],
       ),
     );
