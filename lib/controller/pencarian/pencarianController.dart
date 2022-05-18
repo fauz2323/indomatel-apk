@@ -22,7 +22,7 @@ class PencarianController extends GetxController {
   stt.SpeechToText speech = stt.SpeechToText();
 
   var isListening = false.obs;
-  var load = true.obs;
+  var load = false.obs;
   var uri = Uri.parse("uri");
   Size? _previewOcr;
   int _cameraOcr = FlutterMobileVision.CAMERA_BACK;

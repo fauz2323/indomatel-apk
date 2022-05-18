@@ -6,6 +6,7 @@ import 'package:indomartel/model/infModel.dart';
 import 'dart:convert';
 
 import 'package:indomartel/view/info/info.dart';
+import 'package:intl/intl.dart';
 
 class InfoController extends GetxController {
   final storage = new FlutterSecureStorage();
@@ -14,6 +15,7 @@ class InfoController extends GetxController {
   var token;
   var codeunik = 0.obs;
   var load = true.obs;
+  late NumberFormat formatNumber;
 
   initialize() async {
     print("object");
@@ -27,8 +29,15 @@ class InfoController extends GetxController {
     if (response.statusCode == 200) {
       var dataJson = json.decode(response.body);
       informasi = InfoModel.fromJson(dataJson);
+      formatNumber = NumberFormat.currency(locale: 'id', symbol: 'Rp.');
+      print(formatNumber);
       load.value = false;
     }
+  }
+
+  pencairan(var bank, var atasNama, var jumlah) async {
+    Map data = {bank: bank, atasNama: atasNama, jumlah: jumlah};
+    print(data);
   }
 
   @override

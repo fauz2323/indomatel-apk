@@ -25,6 +25,7 @@ class ConfirmController extends GetxController {
       //
       final data = json.decode(response.body);
       atm = Atm.fromJson(data);
+      print("WA adalah : ${atm.wa}");
       load.value = true;
     } else {
       load.value = true;
@@ -45,7 +46,7 @@ class ConfirmController extends GetxController {
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       codeunik.value = data['code'];
-      print(data['code']);
+      print(data['wa']);
       get.value = false;
       load.value = true;
     }

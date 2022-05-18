@@ -158,7 +158,9 @@ class Pencarian extends StatelessWidget {
                                 mesin: e.nomorMesin,
                               );
                             }).toList())
-                      : Text("Silahkan Cari Data")),
+                      : (pencarianController.load.value)
+                          ? CircularProgressIndicator()
+                          : Text("Silahkan Cari Data")),
                 ),
                 SizedBox(
                   height: 30,

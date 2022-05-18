@@ -12,7 +12,9 @@ class PopupAkun extends StatelessWidget {
   void whatsAppOpen() async {
     bool whatsapp = await FlutterLaunch.hasApp(name: "whatsapp");
     if (whatsapp) {
-      await FlutterLaunch.launchWhatsapp(phone: "0888898888", message: "Hello");
+      await FlutterLaunch.launchWhatsapp(
+          phone: confirmController.atm.wa,
+          message: "Hello, bagaimana cara aktivasi aplikasi INDOMATEL?");
     } else {
       Get.snackbar("Error", "WhatsApp tidak ditemukan");
     }
@@ -24,14 +26,14 @@ class PopupAkun extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     return AlertDialog(
       title: Text(text),
-      content: (akun)
-          ? Container(
-              height: height * 40 / 100,
-              width: width * 40 / 100,
-              child: Center(
-                  child: Obx(
-                () => (confirmController.load.value)
-                    ? Column(
+      content: Obx(
+        () => confirmController.load.value
+            ? (akun)
+                ? Container(
+                    height: height * 40 / 100,
+                    width: width * 40 / 100,
+                    child: Center(
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -41,31 +43,48 @@ class PopupAkun extends StatelessWidget {
                           Text("sebesar : "),
                           Text('Rp. ${confirmController.codeunik.value}')
                         ],
-                      )
-                    : CircularProgressIndicator(),
-              )),
-            )
-          : Container(
-              width: width * 50 / 100,
-              height: height * 40 / 100,
-              child: Column(
-                children: [
-                  Text(
-                    "Jika anda bingung untuk melakukan aktifasi aplikasi mohon untuk menghubungi admin dibawah ini...",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(fontWeight: FontWeight.w400),
-                  ),
-                  IconButton(
-                      onPressed: () {}, icon: Icon(Icons.wallet_giftcard)),
-                  ElevatedButton(
-                      onPressed: () {
-                        whatsAppOpen();
-                      },
-                      child: Text("Whatsapp")),
-                  ElevatedButton(onPressed: () {}, child: Text("Email")),
-                ],
+                      ),
+                    ),
+                  )
+                : Container(
+                    width: width * 50 / 100,
+                    height: height * 40 / 100,
+                    child: Column(
+                      children: [
+                        Text(
+                          "Jika anda kesulitan untuk melakukan aktifasi aplikasi mohon untuk menghubungi admin dibawah ini...",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(fontWeight: FontWeight.w400),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        SizedBox(
+                          width: width * 60 / 100,
+                          child: ElevatedButton(
+                              onPressed: () {
+                                whatsAppOpen();
+                              },
+                              child: Text("Whatsapp")),
+                        ),
+                        SizedBox(
+                          width: width * 60 / 100,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Get.snackbar("Message", "Coming soon");
+                            },
+                            child: Text("Email"),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+            : Container(
+                height: height * 40 / 100,
+                width: width * 40 / 100,
+                child: Center(child: CircularProgressIndicator()),
               ),
-            ),
+      ),
       actions: [
         (akun)
             ? Row(

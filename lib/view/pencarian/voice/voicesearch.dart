@@ -55,7 +55,6 @@ class VoiceSearch extends StatelessWidget {
                       trailing: IconButton(
                         onPressed: () {
                           pencarianController.controller.clear();
-                          pencarianController.onSearch('');
                         },
                         icon: Icon(Icons.cancel),
                       ),
@@ -194,7 +193,9 @@ class VoiceSearch extends StatelessWidget {
                                 mesin: e.nomorMesin,
                               );
                             }).toList())
-                      : Text("Silahkan Cari Data")),
+                      : (pencarianController.load.value)
+                          ? CircularProgressIndicator()
+                          : Text("Silahkan Cari Data")),
                 ),
 
                 // ElevatedButton(

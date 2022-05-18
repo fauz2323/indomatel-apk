@@ -72,7 +72,7 @@ class Home extends StatelessWidget {
                                 H: height * 20 / 100,
                                 W: width * 40 / 100,
                                 icon: Icons.people,
-                                text: "Perpanjang Akun",
+                                text: "Informasi Akun",
                                 onPressed: () {
                                   Get.to(() => Info());
                                 },

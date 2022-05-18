@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:indomartel/controller/info/infoController.dart';
+import 'package:indomartel/view/info/widget/pencairan.dart';
 import 'package:indomartel/view/screen_redirect/widget/confirmAkun.dart';
 
 class Info extends StatelessWidget {
@@ -91,8 +93,47 @@ class Info extends StatelessWidget {
                                   ],
                                 ),
                                 Divider(),
+                                Row(
+                                  children: [
+                                    Text("Saldo Bonus"),
+                                    Spacer(),
+                                    Text(infoController.formatNumber.format(
+                                        infoController.informasi.balance))
+                                  ],
+                                ),
+                                Divider(),
                                 SizedBox(
                                   height: height * 5 / 100,
+                                ),
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                    padding: EdgeInsets.only(
+                                        top: 20,
+                                        bottom: 20,
+                                        left: 50,
+                                        right: 50),
+                                    backgroundColor:
+                                        Color.fromRGBO(0, 255, 135, 1),
+                                  ),
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            PopupAkun(
+                                              text: "Pembayaran",
+                                              akun: true,
+                                            ));
+                                  },
+                                  child: Text(
+                                    "Perpanjang Masa Aktif",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
                                 ),
                                 TextButton(
                                     style: TextButton.styleFrom(
@@ -106,15 +147,14 @@ class Info extends StatelessWidget {
                                     ),
                                     onPressed: () {
                                       showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) =>
-                                              PopupAkun(
-                                                text: "Pembayaran",
-                                                akun: true,
-                                              ));
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            PencairanDana(
+                                                infoController: infoController),
+                                      );
                                     },
                                     child: Text(
-                                      "Perpanjang Masa Aktif",
+                                      "Cairkan Dana",
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold,
